@@ -5,3 +5,9 @@ document.addEventListener('keydown', (event) => {
     }
   });
   
+  document.addEventListener('mousedown', (event) => {
+    if (event.button === 1) { // Mouse wheel button
+      chrome.runtime.sendMessage({ action: "togglePopup" });
+    }
+  });
+  
