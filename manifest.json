@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "YouTube Popup Mode",
+    "description": "Trigger popup mode in YouTube video on key press.",
+    "version": "1.0",
+    "permissions": [
+      "activeTab",
+      "https://www.youtube.com/*"
+    ],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://www.youtube.com/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  
