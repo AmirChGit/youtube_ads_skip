@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "YouTube skip ads",
-    "description": "Trigger popup mode in YouTube video on key press.",
+    "description": "executes a skip ad routine if it detects any. you can manually trigger the skip routine by pressing ² or the mouse wheel button",
     "version": "1.0",
     "permissions": [
       "activeTab",

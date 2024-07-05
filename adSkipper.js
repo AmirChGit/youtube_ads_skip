@@ -35,7 +35,7 @@ function skipAd() {
         }).catch(error => {
           console.error('Error exiting Picture-in-Picture mode:', error);
         });
-      }, 500);
+      }, 100);
     }).catch(error => {
       console.error('Error entering Picture-in-Picture mode:', error);
     });
