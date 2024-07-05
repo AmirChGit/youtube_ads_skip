@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "YouTube Popup Mode",
+    "name": "YouTube skip ads",
     "description": "Trigger popup mode in YouTube video on key press.",
     "version": "1.0",
     "permissions": [

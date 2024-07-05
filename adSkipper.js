@@ -23,7 +23,7 @@ function skipAd() {
 
   const intervalId = setInterval(() => {
     checkForSkipButton();
-  }, 1000); // Check every second for the skip ad button
+  }, 100); // Check every second for the skip ad button
 
   // Request Picture-in-Picture and skip to the end
   if (!document.pictureInPictureElement) {
@@ -42,40 +42,24 @@ function skipAd() {
   }
 }
 
-// Automatically run skipAd if an ad is detected
-const observer = new MutationObserver(mutations => {
-  mutations.forEach(mutation => {
-    if (mutation.addedNodes.length) {
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType === 1 && (
-            node.matches('.video-ads .ytp-ad-module') || 
-            node.matches('.video-ads.ytp-ad-module') || 
-            node.matches('.ytp-ad-button-vm.ytp-ad-component--clickable ytp-ad-button--style-filled.ytp-ad-button--size-default') || 
-            node.matches('.ytp-ad-button__text') || 
-            node.matches('.ytp-ad-player-overlay-layout__ad-info-container') || 
-            node.matches('.ytp-ad-player-overlay-layout') || 
-            node.matches('.ytp-ad-player-overlay-layout__player-card-container') || 
-            node.matches('.ytp-ad-simple-ad-badge') || 
-            node.matches('.ytp-ad-avatar-lockup-card__avatar_and_text_container') || 
-            node.matches('.ytp-ad-avatar-lockup-card__text_container') || 
-            node.matches('.ytp-ad-player-overlay-layout__ad-info-container') || 
-            node.matches('.ytp-ad-duration-remaining') || 
-            node.matches('.ytp-ad-player-overlay-layout__skip-or-preview-container') || 
-            node.matches('.ytp-ad-hover-text-container.ytp-ad-info-hover-text-short') || 
-            node.matches('.ytp-ad-text') || 
-            node.matches('.ytp-visit-advertiser-link.ytp-ad-component--clickable') || 
-            node.matches('.ytp-ad-player-overlay-layout__skip-or-preview-container') || 
-            node.matches('.ytp-preview-ad') || 
-            node.matches('.ytp-preview-ad__text') || 
-            node.matches('.ytp-ad-player-overlay-layout__ad-disclosure-banner-container'))) {
-          skipAd();
-        }
-      });
-    }
-  });
-});
+// Function to observe the specific ad div and check for changes
+function observeAdDiv() {
+  const targetNode = document.querySelector('.video-ads.ytp-ad-module[data-layer="4"]');
+  if (!targetNode) return;
 
-observer.observe(document.body, { childList: true, subtree: true });
+  const config = { childList: true, subtree: true };
+
+  const callback = (mutationsList) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        skipAd();
+      }
+    }
+  };
+
+  const observer = new MutationObserver(callback);
+  observer.observe(targetNode, config);
+}
 
 // Listen for key press and mouse wheel button press
 document.addEventListener('keydown', (event) => {
@@ -89,3 +73,9 @@ document.addEventListener('mousedown', (event) => {
     skipAd();
   }
 });
+
+// Start observing the ad div when the script loads
+observeAdDiv();
+
+// Re-observe the ad div periodically to handle cases where the ad div might be dynamically replaced
+setInterval(observeAdDiv, 100);
