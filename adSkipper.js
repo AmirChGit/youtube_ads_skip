@@ -8,6 +8,7 @@ function skipAd() {
     if (skipAdDiv && skipAdDiv.children.length > 1) {
       const skipButton = skipAdDiv.children[1];
       if (skipButton && skipButton.classList.contains('ytp-skip-ad-button')) {
+        video.pause();
         skipButton.click();
         video.play();
       }
@@ -16,6 +17,7 @@ function skipAd() {
     // Check for the final skip button after exiting Picture-in-Picture mode
     const finalSkipButton = document.querySelector('.ytp-ad-skip-button-modern.ytp-button');
     if (finalSkipButton) {
+      video.pause();
       finalSkipButton.click();
       video.play();
     }
@@ -23,7 +25,7 @@ function skipAd() {
 
   const intervalId = setInterval(() => {
     checkForSkipButton();
-  }, 100); // Check every second for the skip ad button
+  }, 500); // Check every second for the skip ad button
 
   // Request Picture-in-Picture and skip to the end
   if (!document.pictureInPictureElement) {
@@ -35,7 +37,7 @@ function skipAd() {
         }).catch(error => {
           console.error('Error exiting Picture-in-Picture mode:', error);
         });
-      }, 100);
+      }, 500);
     }).catch(error => {
       console.error('Error entering Picture-in-Picture mode:', error);
     });
@@ -78,4 +80,4 @@ document.addEventListener('mousedown', (event) => {
 observeAdDiv();
 
 // Re-observe the ad div periodically to handle cases where the ad div might be dynamically replaced
-setInterval(observeAdDiv, 100);
+setInterval(observeAdDiv, 500);

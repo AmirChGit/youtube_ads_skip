@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "YouTube skip ads",
     "description": "executes a skip ad routine if it detects any. you can manually trigger the skip routine by pressing ² or the mouse wheel button",
-    "version": "1.0",
+    "version": "1.2",
     "permissions": [
       "activeTab",
       "https://www.youtube.com/*"
