@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Chrome extension automatically skips YouTube ads by monitoring a specific ad element on the page. It uses a MutationObserver to detect changes in the ad element and triggers the ad-skipping routine when necessary. The extension also allows manual triggering of the ad-skipping routine using the `²` key or the mouse wheel button.
+This Opera extension automatically skips YouTube ads by monitoring a specific ad element on the page. It uses a MutationObserver to detect changes in the ad element and triggers the ad-skipping routine when necessary. The extension also allows manual triggering of the ad-skipping routine using the `²` key or the mouse wheel button.
 
 ## Features
 
